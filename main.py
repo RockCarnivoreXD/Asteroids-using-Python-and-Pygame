@@ -9,6 +9,7 @@ def main():
     new_clock = pygame.time.Clock()
     dt = 0
     player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
+    
     print(
         "Starting Asteroids!"
         "\nScreen width: 1280"
