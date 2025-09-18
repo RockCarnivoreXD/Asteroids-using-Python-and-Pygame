@@ -1,6 +1,7 @@
 import pygame
 from constants import *
 from circleshape import CircleShape
+from shot import Shot
 
 class Player(CircleShape):
     def __init__(self, x, y):
@@ -35,5 +36,14 @@ class Player(CircleShape):
             self.move(+dt)
         if keys[pygame.K_s]:
             self.move(-dt)
-    
+        if keys[pygame.K_SPACE]:
+            self.shoot()
 
+    def shoot(self):
+        direction = pygame.Vector2(0, 1).rotate(self.rotation)
+        shot = Shot(self.position.x, self.position.y, SHOT_RADIUS)
+        shot.velocity = direction * PLAYER_SHOOT_SPEED
+
+    #def spawn(self, radius, position, velocity):
+        #asteroid = Asteroid(position.x, position.y, radius)
+        #asteroid.velocity = velocity
