@@ -30,19 +30,27 @@ def main():
         )
     
     while True:
-      for event in pygame.event.get():
+        for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-      screen.fill((0, 0, 0))
-      for obj in drawable:
+        screen.fill((0, 0, 0))
+        
+        updatable.update(dt)
+        for asteroid in asteroids:
+            if player.collision_check(asteroid) == True:
+                print("Game over!")
+                sys.exit()
+                
+            for shot in shots:
+                if shot.collision_check(asteroid) == True:
+                    shot.kill()
+                    asteroid.kill()
+                    break
+        for obj in drawable:
             obj.draw(screen)
-      updatable.update(dt)
-      for asteroid in asteroids:
-          if player.collision_check(asteroid) == True:
-              print("Game over!")
-              sys.exit()
-      pygame.display.flip()
-      dt = new_clock.tick(60) / 1000
+        
+        pygame.display.flip()
+        dt = new_clock.tick(60) / 1000
 
 if __name__ == "__main__":
     main()
